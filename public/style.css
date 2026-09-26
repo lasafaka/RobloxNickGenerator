@@ -1,0 +1,196 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    min-height: 100vh;
+    background: #0b0b0f;
+    color: white;
+    font-family: Arial, sans-serif;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    padding: 20px;
+}
+
+.container {
+    width: 100%;
+    max-width: 650px;
+
+    padding: 35px;
+
+    background: #15151c;
+
+    border-radius: 20px;
+
+    box-shadow: 0 0 40px rgba(0, 0, 0, 0.5);
+}
+
+h1 {
+    text-align: center;
+
+    font-size: 32px;
+
+    margin-bottom: 10px;
+}
+
+p {
+    text-align: center;
+
+    color: #999;
+
+    margin-bottom: 30px;
+}
+
+.settings {
+    display: flex;
+
+    gap: 12px;
+
+    margin-bottom: 20px;
+}
+
+.setting {
+    flex: 1;
+}
+
+label {
+    display: block;
+
+    color: #aaa;
+
+    margin-bottom: 7px;
+}
+
+select {
+    width: 100%;
+
+    padding: 12px;
+
+    border: none;
+
+    border-radius: 10px;
+
+    background: #24242d;
+
+    color: white;
+
+    outline: none;
+}
+
+.generate {
+    width: 100%;
+
+    padding: 15px;
+
+    border: none;
+
+    border-radius: 10px;
+
+    background: white;
+
+    color: #111;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+.generate:hover {
+    transform: scale(1.02);
+}
+
+#results {
+    margin-top: 25px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 10px;
+}
+
+.nick {
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    padding: 14px;
+
+    background: #202029;
+
+    border-radius: 10px;
+}
+
+.nick-name {
+    font-size: 18px;
+
+    font-weight: bold;
+}
+
+.status {
+    margin-left: auto;
+
+    font-size: 13px;
+}
+
+.available {
+    color: #5cff8a;
+}
+
+.taken {
+    color: #ff6262;
+}
+
+.error {
+    color: #ffc857;
+}
+
+.copy {
+    padding: 8px 12px;
+
+    border: none;
+
+    border-radius: 8px;
+
+    background: #33333e;
+
+    color: white;
+
+    cursor: pointer;
+}
+
+.loading {
+    text-align: center;
+
+    padding: 20px;
+
+    color: #aaa;
+}
+
+@media (max-width: 600px) {
+
+    .settings {
+        flex-direction: column;
+    }
+
+    .container {
+        padding: 25px;
+    }
+
+    .nick {
+        flex-wrap: wrap;
+    }
+
+    .status {
+        margin-left: 0;
+    }
+}
