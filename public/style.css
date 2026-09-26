@@ -1,265 +1,134 @@
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-}
+/*
+html
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-html {
-    scroll-behavior: smooth;
-}
+    <title>GeneratorNickRoblox</title>
 
-body {
-    min-height: 100vh;
-    background: #08080c;
-    color: white;
-    font-family: Arial, sans-serif;
-}
+    <link rel="stylesheet" href="style.css">
+</head>
 
-.hero {
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    padding: 40px 20px;
-}
+<body>
 
-.container {
-    width: 100%;
-    max-width: 700px;
-    margin: auto;
-    padding: 45px;
-    background: #121219;
-    border: 1px solid #252531;
-    border-radius: 24px;
-    box-shadow: 0 0 80px rgba(0, 0, 0, 0.5);
-}
+    <section class="hero">
 
-.badge {
-    width: fit-content;
-    margin: 0 auto 15px;
-    padding: 7px 12px;
-    border-radius: 50px;
-    background: #20202a;
-    color: #aaa;
-    font-size: 11px;
-    font-weight: bold;
-    letter-spacing: 2px;
-}
+        <div class="container">
 
-h1 {
-    text-align: center;
-    font-size: clamp(36px, 7vw, 58px);
-    margin-bottom: 12px;
-}
+            <div class="badge">ROBLOX NICK GENERATOR</div>
 
-h1 span {
-    color: #888;
-}
+            <h1>
+                Generator<span>Nick</span>Roblox
+            </h1>
 
-.container > p {
-    text-align: center;
-    color: #888;
-    line-height: 1.6;
-    margin-bottom: 35px;
-}
+            <p class="description">
+                Znajdź swój nowy nick do Roblox.
+                Generuj stylowe i ciekawe nazwy.
+            </p>
 
-.settings {
-    display: flex;
-    gap: 12px;
-    margin-bottom: 20px;
-}
+            <div class="settings">
 
-.setting {
-    flex: 1;
-}
+                <div class="setting">
+                    <label for="style">Styl</label>
 
-label {
-    display: block;
-    color: #aaa;
-    font-size: 13px;
-    margin-bottom: 7px;
-}
+                    <select id="style">
+                        <option value="clean">✨ Clean</option>
+                        <option value="short">⚡ Krótki</option>
+                        <option value="gaming">🎮 Gaming</option>
+                        <option value="vfx">🎬 VFX</option>
+                        <option value="og">💎 OG</option>
+                        <option value="random">🔥 Mix</option>
+                    </select>
+                </div>
 
-select,
-input {
-    width: 100%;
-    padding: 13px;
-    border: 1px solid #2a2a35;
-    border-radius: 10px;
-    background: #1c1c25;
-    color: white;
-    outline: none;
-}
+                <div class="setting">
+                    <label for="length">Długość</label>
 
-select:focus,
-input:focus {
-    border-color: #777;
-}
+                    <select id="length">
+                        <option value="4">4 znaki</option>
+                        <option value="5" selected>5 znaków</option>
+                        <option value="6">6 znaków</option>
+                        <option value="7">7 znaków</option>
+                        <option value="8">8 znaków</option>
+                    </select>
+                </div>
 
-.generate,
-.custom-box button {
-    width: 100%;
-    padding: 15px;
-    border: none;
-    border-radius: 11px;
-    background: white;
-    color: #111;
-    font-weight: bold;
-    cursor: pointer;
-    transition: 0.2s;
-}
+                <div class="setting">
+                    <label for="amount">Liczba</label>
 
-.generate:hover,
-.custom-box button:hover {
-    transform: translateY(-2px);
-}
+                    <select id="amount">
+                        <option value="5">5</option>
+                        <option value="10" selected>10</option>
+                        <option value="20">20</option>
+                    </select>
+                </div>
 
-#results,
-#customResults {
-    margin-top: 25px;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-}
+            </div>
 
-.nick {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    padding: 14px;
-    background: #1b1b24;
-    border: 1px solid #292934;
-    border-radius: 11px;
-}
+            <button class="generate" onclick="generateNames()">
+                GENERUJ NICKI
+            </button>
 
-.nick-name {
-    font-size: 18px;
-    font-weight: bold;
-}
+            <div id="results"></div>
 
-.status {
-    margin-left: auto;
-    font-size: 12px;
-}
+        </div>
 
-.available {
-    color: #63ff91;
-}
+        <div class="scroll-down">
+            <span class="arrow">↓</span>
+            <span>PRZEWIŃ NIŻEJ</span>
+        </div>
 
-.copy {
-    padding: 8px 12px;
-    border: none;
-    border-radius: 8px;
-    background: #30303b;
-    color: white;
-    cursor: pointer;
-}
+    </section>
 
-.loading {
-    text-align: center;
-    padding: 20px;
-    color: #888;
-}
 
-.scroll-down {
-    text-align: center;
-    color: #777;
-    font-size: 25px;
-    cursor: pointer;
-    animation: float 1.5s infinite;
-}
+    <section class="custom-section">
 
-.scroll-down span {
-    display: block;
-    margin-top: 5px;
-    font-size: 11px;
-    letter-spacing: 2px;
-}
+        <div class="custom-container">
 
-@keyframes float {
-    0%,
-    100% {
-        transform: translateY(0);
-    }
+            <div class="badge">CUSTOM NICK</div>
 
-    50% {
-        transform: translateY(8px);
-    }
-}
+            <h2>Stwórz nick z własnego napisu</h2>
 
-.custom-section {
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    padding: 60px 20px;
-    background: #0d0d13;
-}
+            <p class="custom-description">
+                Wpisz swoje słowo, ksywkę albo nazwę,
+                a generator stworzy propozycje związane z Twoim napisem.
+            </p>
 
-.custom-container {
-    width: 100%;
-    max-width: 700px;
-    margin: auto;
-}
+            <div class="custom-box">
 
-.custom-container .badge {
-    margin-bottom: 15px;
-}
+                <input
+                    id="customText"
+                    type="text"
+                    maxlength="15"
+                    placeholder="np. Rizo"
+                    autocomplete="off"
+                >
 
-h2 {
-    text-align: center;
-    font-size: clamp(28px, 6vw, 45px);
-    margin-bottom: 15px;
-}
+                <select id="customStyle">
+                    <option value="normal">✨ Normal</option>
+                    <option value="clean">💎 Clean</option>
+                    <option value="gaming">🎮 Gaming</option>
+                    <option value="vfx">🎬 VFX</option>
+                    <option value="short">⚡ Short</option>
+                </select>
 
-.custom-container > p {
-    max-width: 550px;
-    margin: 0 auto 30px;
-    text-align: center;
-    color: #888;
-    line-height: 1.6;
-}
+                <button onclick="generateCustomNames()">
+                    GENERUJ
+                </button>
 
-.custom-box {
-    display: grid;
-    grid-template-columns: 1fr 160px;
-    gap: 10px;
-    padding: 10px;
-    background: #171720;
-    border: 1px solid #292934;
-    border-radius: 15px;
-}
+            </div>
 
-.custom-box input {
-    grid-column: 1;
-}
+            <div id="customResults"></div>
 
-.custom-box select {
-    grid-column: 2;
-}
+        </div>
 
-.custom-box button {
-    grid-column: 1 / 3;
-}
+    </section>
 
-@media (max-width: 600px) {
-    .container {
-        padding: 28px 20px;
-    }
 
-    .settings {
-        flex-direction: column;
-    }
+    <script src="script.js"></script>
 
-    .nick {
-        flex-wrap: wrap;
-    }
-
-    .status {
-        margin-left: 0;
-    }
-
-    .custom-box {
-        display: flex;
-        flex-direction: column;
-    }
-}
+</body>
+</html>
+*/
