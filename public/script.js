@@ -1,23 +1,27 @@
-const syllables = [
-    "va", "ve", "vi", "vo",
-    "za", "ze", "zi", "zo",
-    "ra", "re", "ri", "ro",
-    "ka", "ke", "ki", "ko",
-    "na", "ne", "ni", "no",
-    "xe", "xi", "xo",
-    "zy", "vy", "ky",
-    "ex", "ix", "ox"
+const cleanParts = [
+    "Rizo", "Vexo", "Ziro", "Kiro", "Nexo",
+    "Viro", "Zeno", "Rexo", "Kavo", "Zavo",
+    "Rivo", "Niro", "Xeno", "Vano", "Zaro"
 ];
 
-const gaming = [
-    "x", "z", "v", "k", "r",
-    "fx", "vx", "zx", "rx",
-    "ix", "ex", "on", "yn"
+const shortParts = [
+    "Rizo", "Vexo", "Ziro", "Kiro", "Nexo",
+    "Viro", "Zeno", "Rexo"
 ];
 
-const vfx = [
-    "vfx", "fx", "edit", "x",
-    "vx", "zn", "rv", "nx"
+const gamingParts = [
+    "Rizo", "Vexo", "Ziro", "Kiro", "Nexo",
+    "Vyn", "Zyn", "Rex", "Vex", "Zex"
+];
+
+const vfxParts = [
+    "Vexo", "Rizo", "Vyn", "Vfxo",
+    "Rexo", "Zyn", "Viro", "Xeno"
+];
+
+const endings = [
+    "x", "z", "v", "r", "n",
+    "fx", "vx", "zx", "ix", "ex"
 ];
 
 function randomItem(array) {
@@ -30,31 +34,19 @@ function makeName(style, length) {
 
     if (style === "clean") {
 
-        while (name.length < length) {
-            name += randomItem(syllables);
-        }
+        name = randomItem(cleanParts);
 
     } else if (style === "short") {
 
-        name =
-            randomItem(syllables).substring(0, 2) +
-            randomItem(syllables).substring(0, 2);
-
-        while (name.length < length) {
-            name += randomItem(["x", "z", "v"]);
-        }
+        name = randomItem(shortParts);
 
     } else if (style === "gaming") {
 
-        name =
-            randomItem(syllables) +
-            randomItem(gaming);
+        name = randomItem(gamingParts) + randomItem(endings);
 
     } else if (style === "vfx") {
 
-        name =
-            randomItem(syllables) +
-            randomItem(vfx);
+        name = randomItem(vfxParts) + randomItem(["fx", "vfx", "x"]);
 
     } else {
 
@@ -68,7 +60,13 @@ function makeName(style, length) {
         return makeName(randomItem(styles), length);
     }
 
+    // Jeżeli nick jest za długi, skracamy go.
     name = name.substring(0, length);
+
+    // Jeżeli jest za krótki, dodajemy litery.
+    while (name.length < length) {
+        name += randomItem(["x", "z", "v"]);
+    }
 
     return name.charAt(0).toUpperCase() + name.slice(1);
 }
@@ -120,12 +118,11 @@ async function generateNames() {
     `;
 
     const available = new Set();
-
     const checked = new Set();
 
     let attempts = 0;
 
-    const maxAttempts = amount * 30;
+    const maxAttempts = amount * 50;
 
 
     while (
